@@ -57,12 +57,10 @@ export async function GET(req, res) {
 
         let body = '';
         if (emailResponse.data.payload.parts) {
-          // Iterate through parts to find the text/plain or text/html parts
           emailResponse.data.payload.parts.forEach(part => {
             if (part.mimeType === 'text/plain') {
               body = part.body.data;
             }
-            // Optionally handle other mime types like 'text/html'
           });
         } else {
           body = emailResponse.data.payload.body.data;
@@ -86,15 +84,6 @@ export async function GET(req, res) {
         };
       })
     );
-
-    // const emails = [{
-    //   subject: 'Sub 1',
-    //   snippet: 'Snippet 1'
-    // },
-    // {
-    //   subject: 'Sub 2',
-    //   snippet: 'Snippet 2'
-    // }]
 
     console.log('Classification done!');
     return NextResponse.json({ success: true, status: '200', emails })
