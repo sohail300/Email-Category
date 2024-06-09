@@ -26,7 +26,7 @@ const SignIn = () => {
           Gemini API key
         </label>
         <input
-          type="text"
+          type="password"
           name="openai-api-key"
           onChange={(e) => setKey(e.target.value)}
           value={key}
