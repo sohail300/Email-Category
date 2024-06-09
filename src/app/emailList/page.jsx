@@ -37,17 +37,16 @@ function EmailList() {
     fetchEmails();
   }, []);
 
-  const apiKey = localStorage?.getItem('apiKey');
-
   async function classifyEmails() {
     setClassifying(true);
     try {
 
       const response = await axios.post('/api/classify', {
-        emails, apiKey
+        emails
       }, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem('token'),
+          'apiKey': localStorage?.getItem('apiKey')
         }
       })
 
@@ -84,10 +83,10 @@ function EmailList() {
     <>
       {
         session ?
-          <div className="flex flex-col w-[100%] border">
+          <div className="flex flex-col w-[100%] my-8">
             <div className="flex items-center bg-white p-4 rounded-lg shadow-md mb-8 w-4/5 justify-between m-auto">
               <div className="flex items-center justify-center ">
-                <Image src="./placeholder.svg" height={400} width={400} alt="Profile" className="rounded-full w-16 h-16 object-cover mr-8" />
+                <Image src={user.image} height={400} width={400} alt="Profile" className="rounded-full w-16 h-16 object-cover mr-8" />
                 <div className="text-center flex flex-col justify-center items-start ">
                   <div className="text-lg font-semibold text-gray-800">{user.name}</div>
                   <div className="text-sm text-gray-600">{user.email}</div>
